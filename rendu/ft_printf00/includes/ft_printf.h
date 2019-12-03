@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/03 05:09:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/03 05:22:49 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ typedef struct	s_spec
 	int		precision;
 	int		padding;
 	int		len_spec;
-}			t_spec;
+}				t_spec;
 
 typedef enum	e_padding
 {
-			RIGHT_PADDING,
-			ZERO_PADDING,
-			LEFT_PADDING
-}			t_padding;
+	RIGHT_PADDING,
+	ZERO_PADDING,
+	LEFT_PADDING
+}				t_padding;
 
 int				ft_printf(char const *format, ...);
 void			ft_putstr_fd(char const *str, int fd);
@@ -50,13 +50,13 @@ char			*convert_uint(va_list args, t_spec conv_spec);
 char			*convert_hexlow(va_list args, t_spec conv_spec);
 char			*convert_hexupp(va_list args, t_spec conv_spec);
 char			*convert_percent(va_list args, t_spec conv_spec);
-char			*ft_strchr(char const *, int c);
+char			*ft_strchr(char const *str, int c);
 int				ft_atoi(char const *str);
 int				ft_isdigit(int c);
 
 char			g_str_conversion[10] = "cspdiuxX%";
 
-char*			(*g_convert[NB_CONVERSIONS])(va_list, t_spec) = 
+char			*(*g_convert[NB_CONVERSIONS])(va_list, t_spec) =
 {
 	&convert_char,
 	&convert_str,
@@ -74,9 +74,7 @@ typedef struct	s_conversion
 	char	token;
 	int		(*fun_ptr)(va_list);
 }				t_conversion;
-*/
 
-/*
 t_conversion	g_jump_table[NB_CONVERSIONS] =
 {
 	{

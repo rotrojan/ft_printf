@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/03 04:59:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/03 05:18:47 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int		parsing(char *fmt, t_spec *conv_spec, char **segment)
 	return (conversion - g_str_conversion);
 }
 
-char	*conversion(char *fmt, va_list args, char **segment)
+char			*conversion(char *fmt, va_list args, char **segment)
 {
 	t_spec		conv_spec;
 	int			conv;

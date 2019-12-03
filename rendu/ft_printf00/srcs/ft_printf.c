@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 03:58:20 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/03 04:59:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/03 05:31:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ static int		ft_vasprintf(char **str, char const *format, va_list args)
 	return (ft_strlen(*str));
 }
 
-int		ft_printf(char const *format, ...)
+int				ft_printf(char const *format, ...)
 {
 	va_list		args;
 	char		*str;
 	int			ret;
-	char *yolo = "yolo";
 
 	str = NULL;
 	va_start(args, format);
@@ -56,5 +55,4 @@ int		ft_printf(char const *format, ...)
 	}
 	va_end(args);
 	return (ret);
-
 }
