@@ -6,13 +6,13 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/03 05:18:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/04 03:47:24 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		parse_flags(char **fmt, t_spec *conv_spec)
+void		parse_flags(char **fmt, t_spec *conv_spec)
 {
 	while (**fmt == '-' || **fmt == '0')
 	{
@@ -30,7 +30,7 @@ static void		parse_flags(char **fmt, t_spec *conv_spec)
 	}
 }
 
-static int		parsing(char *fmt, t_spec *conv_spec, char **segment)
+int		parsing(char *fmt, t_spec *conv_spec, char **segment)
 {
 	char	*conversion;
 
@@ -59,7 +59,7 @@ char			*conversion(char *fmt, va_list args, char **segment)
 
 	if ((conv = parsing(fmt, &conv_spec, segment)) == -1)
 		return (NULL);
-	if (!(str = (*g_convert[conv])(args, conv_spec)))
+	if (!(str = (*g_convert[conv])(args, &conv_spec)))
 		return (NULL);
 	return (str);
 }

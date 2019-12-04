@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/03 05:22:49 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/04 06:34:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# define NB_CONVERSIONS 9
+# include "../lib/libft.h"
+# define NB_CONVERSIONS 1
 # define STR_CONVERSIONS "cspdiuxX%"
 # define STR_FLAGS "-0"
 
@@ -35,37 +36,30 @@ typedef enum	e_padding
 }				t_padding;
 
 int				ft_printf(char const *format, ...);
-void			ft_putstr_fd(char const *str, int fd);
-char			*ft_itoa(int n);
-int				ft_strlen(char const *str);
-char			*ft_substr(char const *s, int start, size_t size);
-char			*ft_strjoin(char const *s1, char const *s2);
-void			ft_putchar_fd(char c);
 char			*conversion(char *conv_spec, va_list args, char **segment);
-char			*convert_char(va_list args, t_spec conv_spec);
-char			*convert_str(va_list args, t_spec conv_spec);
-char			*convert_ptr(va_list args, t_spec conv_spec);
-char			*convert_int(va_list args, t_spec conv_spec);
-char			*convert_uint(va_list args, t_spec conv_spec);
-char			*convert_hexlow(va_list args, t_spec conv_spec);
-char			*convert_hexupp(va_list args, t_spec conv_spec);
-char			*convert_percent(va_list args, t_spec conv_spec);
-char			*ft_strchr(char const *str, int c);
-int				ft_atoi(char const *str);
-int				ft_isdigit(int c);
+char			*convert_char(va_list args, t_spec *conv_spec);
+/*
+char			*convert_str(va_list args, t_spec *conv_spec);
+char			*convert_ptr(va_list args, t_spec *conv_spec);
+char			*convert_int(va_list args, t_spec *conv_spec);
+char			*convert_uint(va_list args, t_spec *conv_spec);
+char			*convert_hexlow(va_list args, t_spec *conv_spec);
+char			*convert_hexupp(va_list args, t_spec *conv_spec);
+char			*convert_percent(va_list args, t_spec *conv_spec);
+*/
 
 char			g_str_conversion[10] = "cspdiuxX%";
 
-char			*(*g_convert[NB_CONVERSIONS])(va_list, t_spec) =
+char			*(*g_convert[NB_CONVERSIONS])(va_list, t_spec*) =
 {
-	&convert_char,
+	&convert_char/*,
 	&convert_str,
 	&convert_ptr,
 	&convert_int,
 	&convert_uint,
 	&convert_hexlow,
 	&convert_hexupp,
-	&convert_percent
+	&convert_percent*/
 };
 
 /*

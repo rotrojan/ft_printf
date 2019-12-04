@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   convert_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 14:39:57 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/04 04:02:44 by rotrojan         ###   ########.fr       */
+/*   Created: 2019/12/03 21:19:17 by rotrojan          #+#    #+#             */
+/*   Updated: 2019/12/03 22:53:09 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *str, int fd)
+char	*convert_char(va_list args, t_spec *conv_spec)
 {
-	write(fd, str, ft_strlen(str));
+	char	*str;
+	char	*current;
+
+	str = (char*)malloc(sizeof(str) * (conv_spec->min_field_width + 1));
+	str[conv_spec->min_field_width] = '\0';
+	current = str;
+	if (conv_spec->padding == LEFT_PADDING)
+	{
+		*current = va_arg(args, int);
+		while (current++)
+			*current = ' ';
+	}
+	return (str);
 }

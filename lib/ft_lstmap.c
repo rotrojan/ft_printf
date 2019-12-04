@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 02:47:20 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/10/29 22:12:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/03 22:59:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*))
 {
-	t_list		*ew_list;
+	t_list		*new_list;
 	t_list		*current_link;
 
 	if (!lst || !f || !del)
