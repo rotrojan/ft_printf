@@ -6,60 +6,85 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/04 03:47:24 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/07 18:39:25 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-void		parse_flags(char **fmt, t_spec *conv_spec)
+/*
+** void	test_disp_struc(t_spec *conv_spec)
+** {
+** printf("width %d\n", conv_spec->min_field_width);
+** printf("precis %d\n", conv_spec->precision);
+** printf("paddin %d\n", conv_spec->padding);
+** }
+*/
+
+void		parse_flags(char **segment, t_spec *conv_spec)
 {
-	while (**fmt == '-' || **fmt == '0')
+	conv_spec->min_field_width = 0;
+	conv_spec->precision = 0;
+	conv_spec->padding = RIGHT_PADDING;
+	(*segment)++;
+	while (**segment == '-' || **segment == '0')
 	{
 		if (conv_spec->padding == RIGHT_PADDING)
 		{
-			if (**fmt == '-')
+			if (**segment == '-')
 				conv_spec->padding = LEFT_PADDING;
-			else if (**fmt == '0')
+			else if (**segment == '0')
 				conv_spec->padding = ZERO_PADDING;
 		}
 		else if (conv_spec->padding == ZERO_PADDING)
-			if (**fmt == '-')
+			if (**segment == '-')
 				conv_spec->padding = LEFT_PADDING;
-		(*fmt)++;
+		(*segment)++;
 	}
 }
 
-int		parsing(char *fmt, t_spec *conv_spec, char **segment)
+int			parsing(char **segment, t_spec *conv_spec)
 {
-	char	*conversion;
+	char	*token;
 
-	conversion = NULL;
-	parse_flags(&fmt, conv_spec);
-	conv_spec->min_field_width = ft_atoi(fmt);
-	while (ft_isdigit(*fmt))
-		fmt++;
-	if (*fmt == '.')
+	token = NULL;
+	parse_flags(segment, conv_spec);
+	conv_spec->min_field_width = ft_atoi(*segment);
+	while (ft_isdigit(**segment))
+		(*segment)++;
+	if (**segment == '.')
 	{
-		conv_spec->precision = ft_atoi(++fmt);
-		while (ft_isdigit(*fmt))
-			fmt++;
+		conv_spec->precision = ft_atoi(++(*segment));
+		while (ft_isdigit(**segment))
+			(*segment)++;
 	}
-	if (!(conversion = ft_strchr(g_str_conversion, *fmt)))
+	if (!(token = ft_strchr(str_conversion, **segment)))
 		return (-1);
-	*segment = ++fmt;
-	return (conversion - g_str_conversion);
+	(*segment)++;
+	return (token - str_conversion);
 }
 
-char			*conversion(char *fmt, va_list args, char **segment)
+int		*ft_conversion(t_printf *pf, va_list args)
 {
-	t_spec		conv_spec;
-	int			conv;
-	char		*str;
+	t_spec			conv_spec;
+	int				conv;
+	static char		*str_conversion = "cspdiuxX%";
+	static char		*(*g_convert[NB_CONVERSIONS])(va_list, t_spec*) = {
+		&convert_char,
+		&convert_str,
+		&convert_ptr,
+		&convert_int,
+		&convert_uint,
+		&convert_hexlow,
+		&convert_hexupp,
+		&convert_percent
+	};
 
-	if ((conv = parsing(fmt, &conv_spec, segment)) == -1)
+	if ((conv = parsing(segment, &conv_spec)) == -1)
 		return (NULL);
 	if (!(str = (*g_convert[conv])(args, &conv_spec)))
 		return (NULL);
+//	(*segment)++;
 	return (str);
 }

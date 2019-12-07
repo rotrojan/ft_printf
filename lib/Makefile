@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 02:53:19 by rotrojan          #+#    #+#              #
-#    Updated: 2019/10/31 11:43:19 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/05 00:34:12 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,21 +46,12 @@ SRCS		=	ft_memset.c			\
 				ft_putstr_fd.c		\
 				ft_putendl_fd.c		\
 				ft_putnbr_fd.c
-SRCS_BONUS	=	ft_lstnew.c			\
-				ft_lstadd_front.c	\
-				ft_lstsize.c		\
-				ft_lstlast.c		\
-				ft_lstadd_back.c	\
-				ft_lstdelone.c		\
-				ft_lstclear.c		\
-				ft_lstiter.c		\
-				ft_lstmap.c
 OBJS		=	$(SRCS:.c=.o)
-OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 
 ################################ MISCELLANEOUS #################################
 
 CFLAGS		=	-Wall -Wextra -Werror -I.
+HEADER		= 	libft.h
 NAME		=	libft.a
 
 ##################################### BIN ######################################
@@ -76,11 +67,8 @@ all		:	$(NAME)
 $(NAME)	:	$(OBJS)
 			$(AR) $@ $^
 
-%.o		:	%.c
+%.o		:	%.c ${HEADER}
 			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-
-bonus	:	$(NAME) $(OBJS_BONUS)
-			$(AR) $^
 
 clean	:
 			$(RM) -r $(OBJS) $(OBJS_BONUS)
