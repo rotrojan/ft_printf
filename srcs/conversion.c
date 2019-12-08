@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/07 18:39:25 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/08 23:10:13 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,55 +22,34 @@
 ** }
 */
 
-void		parse_flags(char **segment, t_spec *conv_spec)
+int		is_token(t_printf *pf)
 {
-	conv_spec->min_field_width = 0;
-	conv_spec->precision = 0;
-	conv_spec->padding = RIGHT_PADDING;
-	(*segment)++;
-	while (**segment == '-' || **segment == '0')
+	char	*str_conversion;
+
+	while (*str_conversion)
 	{
-		if (conv_spec->padding == RIGHT_PADDING)
-		{
-			if (**segment == '-')
-				conv_spec->padding = LEFT_PADDING;
-			else if (**segment == '0')
-				conv_spec->padding = ZERO_PADDING;
-		}
-		else if (conv_spec->padding == ZERO_PADDING)
-			if (**segment == '-')
-				conv_spec->padding = LEFT_PADDING;
-		(*segment)++;
+		if (pf->fmt[pf->i_fmt] == *str_conversion)
+			return (1);
+		str_conversion++;
+	}
+	return (0);
+}
+
+void		parsing(t_printf *pf, t_spec *spec, va_list args)
+{
+	while (pf->fmt[pf->i_fmt])
+	{
+		
 	}
 }
 
-int			parsing(char **segment, t_spec *conv_spec)
+void		ft_conversion(t_printf *pf, va_list args)
 {
-	char	*token;
-
-	token = NULL;
-	parse_flags(segment, conv_spec);
-	conv_spec->min_field_width = ft_atoi(*segment);
-	while (ft_isdigit(**segment))
-		(*segment)++;
-	if (**segment == '.')
-	{
-		conv_spec->precision = ft_atoi(++(*segment));
-		while (ft_isdigit(**segment))
-			(*segment)++;
-	}
-	if (!(token = ft_strchr(str_conversion, **segment)))
-		return (-1);
-	(*segment)++;
-	return (token - str_conversion);
-}
-
-int		*ft_conversion(t_printf *pf, va_list args)
-{
-	t_spec			conv_spec;
+	t_spec			spec;
 	int				conv;
-	static char		*str_conversion = "cspdiuxX%";
-	static char		*(*g_convert[NB_CONVERSIONS])(va_list, t_spec*) = {
+	static char		*str_conversion = STR_CONVERSION;
+	static int		*(*convert[NB_CONVERSIONS])(t_printf*, t_spec*, va_list) =
+	{
 		&convert_char,
 		&convert_str,
 		&convert_ptr,
@@ -81,10 +60,13 @@ int		*ft_conversion(t_printf *pf, va_list args)
 		&convert_percent
 	};
 
-	if ((conv = parsing(segment, &conv_spec)) == -1)
-		return (NULL);
-	if (!(str = (*g_convert[conv])(args, &conv_spec)))
-		return (NULL);
-//	(*segment)++;
-	return (str);
+	pf->i_fmt++;
+	parsing(pf, &spec, args);
+	conv = 0;
+	while (conv < NB_CONVERSIONS)
+	{
+		if (str_conversion[conv] == pf->fmt[pf->i_fmt])
+			(convert)[conv](pf, &spec, args);
+		conv++;
+	}
 }
