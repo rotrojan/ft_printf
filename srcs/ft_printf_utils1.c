@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 01:53:34 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/07 16:49:53 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/09 22:27:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*ft_strchr(char const *s, int c)
 	return (NULL);
 }
 
+/*
 char	*ft_strdup(char const *s1)
 {
 	char			*str;
@@ -97,23 +98,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-size_t		ft_strlen(char const *s)
-{
-	size_t		size;
-
-	size = 0;
-	while (*(s + size))
-		size++;
-	return (size);
-}
-
-int		ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
 char		*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
@@ -140,6 +124,24 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		*tmp++ = *(cpy_s++ + start);
 	*tmp = '\0';
 	return (str);
+}
+
+*/
+size_t		ft_strlen(char const *s)
+{
+	size_t		size;
+
+	size = 0;
+	while (*(s + size))
+		size++;
+	return (size);
+}
+
+int		ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 void	ft_bzero(void *b, size_t n)
