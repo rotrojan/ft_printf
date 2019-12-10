@@ -44,14 +44,18 @@ typedef enum	e_padding
 	LEFT_PADDING
 }				t_padding;
 
-/*************************FT_PRINTF FUNCTIONS**********************************/
+/*
+**************************FT_PRINTF FUNCTIONS***********************************
+*/
 
 int				ft_printf(char const *format, ...);
 void			print_buff_and_clear(t_printf *pf);
-void			ft_conversion(t_printf *pf,  va_list args);
+void			ft_conversion(t_printf *pf, va_list args);
 void			parsing(t_printf *pf, t_spec *spec, va_list args, int *conv);
 
-/************************CONVERSION FUNCTIONS**********************************/
+/*
+*************************CONVERSION FUNCTIONS***********************************
+*/
 
 void			convert_char(t_printf *pf, t_spec *conv_spec, va_list args);
 void			convert_str(t_printf *pf, t_spec *conv_spec, va_list args);
@@ -62,7 +66,9 @@ void			convert_hexlow(t_printf *pf, t_spec *conv_spec, va_list args);
 void			convert_hexupp(t_printf *pf, t_spec *conv_spec, va_list args);
 void			convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 
-/*****************************UTILS FUNCTIONS**********************************/
+/*
+******************************UTILS FUNCTIONS***********************************
+*/
 
 int				ft_atoi_lite(char const *str);
 int				ft_isdigit(int c);
