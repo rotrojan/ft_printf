@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	print_buff_and_clear(t_printf *pf)
 {
@@ -21,7 +20,7 @@ void	print_buff_and_clear(t_printf *pf)
 	pf->already_written += BUFFER_SIZE;
 }
 
-int				ft_printf(char const *format, ...)
+int		ft_printf(char const *format, ...)
 {
 	va_list		args;
 	t_printf	pf;
@@ -38,10 +37,12 @@ int				ft_printf(char const *format, ...)
 				print_buff_and_clear(&pf);
 		}
 		else
+		{
 			ft_conversion(&pf, args);
+			pf.i_fmt++;
+		}
 	}
 	va_end(args);
 	write(STDIN_FILENO, pf.buf, pf.i_buf);
 	return (pf.i_buf + pf.already_written);
-
 }

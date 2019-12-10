@@ -14,10 +14,10 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdarg.h>
-# define NB_CONVERSIONS 1
+# define NB_CONVERSIONS 9
 # define STR_CONVERSION "cspdiuxX%"
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 4096
 # endif
 
 typedef struct	s_spec
@@ -64,8 +64,7 @@ void			convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 
 /*****************************UTILS FUNCTIONS**********************************/
 
-int				ft_atoi(char const *str);
-void			*ft_memcpy(void *dst, void const *src, size_t n);
+int				ft_atoi_lite(char const *str);
 int				ft_isdigit(int c);
 void			ft_bzero(void *b, size_t n);
 size_t			ft_strlen(char const *str);
