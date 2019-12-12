@@ -27,7 +27,7 @@ void		ft_conversion(t_printf *pf, va_list args)
 	t_spec			spec;
 	int				index_conv;
 	static void		(*convert[NB_CONVERSIONS])(t_printf*, t_spec*, va_list) = {
-		&convert_char,
+		&convert_char/*,
 		&convert_str,
 		&convert_ptr,
 		&convert_int,
@@ -35,7 +35,7 @@ void		ft_conversion(t_printf *pf, va_list args)
 		&convert_uint,
 		&convert_hexlow,
 		&convert_hexupp,
-		&convert_percent
+		&convert_percent*/
 	};
 
 	index_conv = -1;

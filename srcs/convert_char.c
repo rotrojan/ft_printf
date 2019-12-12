@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 21:19:17 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/09 23:37:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/11 21:08:09 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void		left_padding(t_printf *pf, t_spec *spec, va_list args)
 {
 	pf->buf[pf->i_buf] = (char)va_arg(args, int);
+	spec->min_field_width--;
 	if (++(pf->i_buf) == BUFFER_SIZE)
 		print_buff_and_clear(pf);
 	while (--spec->min_field_width >= 0)

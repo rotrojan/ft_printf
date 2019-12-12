@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdarg.h>
-# define NB_CONVERSIONS 9
+# define NB_CONVERSIONS 1
 # define STR_CONVERSION "cspdiuxX%"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096

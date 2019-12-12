@@ -11,9 +11,10 @@
 # **************************************************************************** #
 
 SRCS_DIR		=		./srcs/
-SRCS			=		ft_printf.c			\
-						convert_char.c		\
-						ft_printf_utils1.c	\
+SRCS			=		ft_printf.c				\
+						convert_char.c			\
+						parsing.c				\
+						ft_printf_utils1.c		\
 						conversion.c
 
 
@@ -52,7 +53,7 @@ ${LIB}			:
 	make -C ${LIB_DIR}
 
 test			: all
-	${CC} ${CFLAGS} -L. -lftprintf main_printf.c
+	${CC} ${CFLAGS} -L. -lftprintf ../../main_printf.c
 	./a.out
 
 clean			:
