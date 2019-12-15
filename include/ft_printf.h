@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/09 23:39:39 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/15 08:07:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdarg.h>
-# define NB_CONVERSIONS 1
+# define NB_CONVERSIONS 9
 # define STR_CONVERSION "cspdiuxX%"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096

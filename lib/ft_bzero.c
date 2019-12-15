@@ -6,13 +6,17 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 05:00:20 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/10/24 10:58:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/14 23:30:43 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 void	ft_bzero(void *b, size_t n)
 {
-	ft_memset(b, 0, n);
+	unsigned char	*tmp;
+
+	tmp = (unsigned char*)b;
+	while (n--)
+		*tmp++ = '\0';
 }
