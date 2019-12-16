@@ -6,9 +6,10 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/15 01:44:07 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/15 08:33:02 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/16 16:04:24 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 SRCS_DIR		=		./srcs/
 SRCS			=		ft_printf.c									\
@@ -26,11 +27,14 @@ SRCS			=		ft_printf.c									\
 LIB_DIR			=		./lib/
 LIB				=		ft_atoi_lite.c								\
 						ft_bzero.c									\
+						ft_strlen.c									\
 						ft_isdigit.c
 
 OBJS_DIR		=		./.objs/
 OBJS			=		$(addprefix ${OBJS_DIR}, ${SRCS:.c=.o})		\
 						$(addprefix ${OBJS_DIR}, ${LIB:.c=.o})
+
+DEPENDENCIES	=		${OBJS:.o=.d}
 
 INCLUDE_DIR		=		./include/
 HEADER			=		ft_printf.h
@@ -51,8 +55,9 @@ all				:		${NAME}
 ${NAME}			:		${OBJS}
 	${AR} $@ $^
 
-${OBJS_DIR}%.o	:		%.c ${INCLUDE_DIR}${HEADER} | ${OBJS_DIR}
-	${CC} ${CFLAGS} -c $< -o $@
+-include ${DEPENDENCIES}
+${OBJS_DIR}%.o	:		%.c | ${OBJS_DIR}
+	${CC} ${CFLAGS} -MMD -c $< -o $@
 
 ${OBJS_DIR}		:
 	mkdir -p ${OBJS_DIR}

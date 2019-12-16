@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/15 08:07:59 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/16 17:44:04 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
+# define MAX(x, y) ((x) > (y) ? (x) : (y))
+# define MIN(x, y) ((x) > (y) ? (y) : (x))
 
 typedef struct	s_spec
 {
 	int		min_field_width;
 	int		precision;
 	int		padding;
-	int		index_conv;
 }				t_spec;
 
 typedef struct	s_printf
@@ -73,6 +74,6 @@ void			convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 int				ft_atoi_lite(char const *str);
 int				ft_isdigit(int c);
 void			ft_bzero(void *b, size_t n);
-size_t			ft_strlen(char const *str);
+int				ft_strlen(char const *str);
 
 #endif

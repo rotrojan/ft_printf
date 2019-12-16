@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/15 08:08:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/16 17:45:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 **}
 */
 
+void		init_spec(t_spec *spec)
+{
+	spec->min_field_width = -1;
+	spec->precision = -1;
+	spec->padding = RIGHT_PADDING;
+}
+
 void		ft_conversion(t_printf *pf, va_list args)
 {
 	t_spec			spec;
@@ -31,7 +38,7 @@ void		ft_conversion(t_printf *pf, va_list args)
 		&convert_str,
 		&convert_ptr,
 		&convert_int,
-		&convert_uint,
+		&convert_int,
 		&convert_uint,
 		&convert_hexlow,
 		&convert_hexupp,
@@ -39,7 +46,7 @@ void		ft_conversion(t_printf *pf, va_list args)
 	};
 
 	index_conv = -1;
-	ft_bzero(&spec, sizeof(spec));
+	init_spec(&spec);
 	pf->i_fmt++;
 	parsing(pf, &spec, args, &index_conv);
 	convert[index_conv](pf, &spec, args);
