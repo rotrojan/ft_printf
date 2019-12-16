@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:21:50 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 17:54:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/16 19:17:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ static void		left_padding(t_printf *pf, t_spec *spec, char *str)
 			print_buff_and_clear(pf);
 	}
 }
-#include <stdio.h>
 
 static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
 {
 	int		to_be_written;
 
-	if (spec->precision == -1 && ft_strlen(str) >= spec->min_field_width)
+	if (spec->precision == -1)
 		while (*str)
 		{
 			pf->buf[pf->i_buf] = *str++;
@@ -43,7 +42,6 @@ static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
 		}
 
 	to_be_written = MIN(ft_strlen(str), spec->precision);
-	printf("%d\n", to_be_written);
 	while (spec->min_field_width-- > to_be_written)
 	{
 		pf->buf[pf->i_buf] = c;
@@ -59,11 +57,18 @@ static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
 	}
 }
 
+static void		put_null(t_printf *pf, t_spec *spec)
+{
+	
+}
+
 void			convert_str(t_printf *pf, t_spec *spec, va_list args)
 {
 	char	*str;
 
 	str = va_arg(args, char*);
+	if (!str)
+		put_null(pf, spec);
 	if (spec->padding == LEFT_PADDING)
 		left_padding(pf, spec, str);
 	else if (spec->padding == ZERO_PADDING)
