@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:21:50 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 19:17:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/18 00:19:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,28 @@
 
 static void		left_padding(t_printf *pf, t_spec *spec, char *str)
 {
-	while (*str && spec->precision-- > 0)
+	if (spec->precision == -1)
+		while (*str)
+		{
+			pf->buf[pf->i_buf] = *str++;
+			if (++pf->i_buf == BUFFER_SIZE)
+				print_buff_and_clear(pf);
+			spec->min_field_width--;
+		}
+	else
+		while (*str && spec->precision-- > 0)
+		{
+			pf->buf[pf->i_buf] = *str++;
+			if (++(pf->i_buf) == BUFFER_SIZE)
+				print_buff_and_clear(pf);
+			spec->min_field_width--;
+		}
+	while (spec->min_field_width > 0)
 	{
-		pf->buf[pf->i_buf] = *str++;
-		if (++(pf->i_buf) == BUFFER_SIZE)
-			print_buff_and_clear(pf);
-		spec->min_field_width--;
-	}
-	while (spec->min_field_width-- > 0)
-	{
-		pf->buf[pf->i_fmt] = ' ';
+		pf->buf[pf->i_buf] = ' ';
 		if (++pf->i_buf == BUFFER_SIZE)
 			print_buff_and_clear(pf);
+		spec->min_field_width--;
 	}
 }
 
@@ -34,32 +44,22 @@ static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
 	int		to_be_written;
 
 	if (spec->precision == -1)
-		while (*str)
-		{
-			pf->buf[pf->i_buf] = *str++;
-			if (++pf->i_buf == BUFFER_SIZE)
-				print_buff_and_clear(pf);
-		}
-
-	to_be_written = MIN(ft_strlen(str), spec->precision);
+		to_be_written = ft_strlen(str);
+	else
+		to_be_written = ft_strlen(str) < spec->precision ?
+			ft_strlen(str) : spec->precision;
 	while (spec->min_field_width-- > to_be_written)
 	{
 		pf->buf[pf->i_buf] = c;
 		if (++pf->i_buf == BUFFER_SIZE)
 			print_buff_and_clear(pf);
 	}
-	while (to_be_written-- && *str)
+	while (to_be_written-- > 0)
 	{
 		pf->buf[pf->i_buf] = *str++;
-		if (++(pf->i_buf) == BUFFER_SIZE)
+		if (++pf->i_buf == BUFFER_SIZE)
 			print_buff_and_clear(pf);
-		spec->min_field_width--;
 	}
-}
-
-static void		put_null(t_printf *pf, t_spec *spec)
-{
-	
 }
 
 void			convert_str(t_printf *pf, t_spec *spec, va_list args)
@@ -67,12 +67,22 @@ void			convert_str(t_printf *pf, t_spec *spec, va_list args)
 	char	*str;
 
 	str = va_arg(args, char*);
-	if (!str)
-		put_null(pf, spec);
-	if (spec->padding == LEFT_PADDING)
-		left_padding(pf, spec, str);
-	else if (spec->padding == ZERO_PADDING)
-		right_padding(pf, spec, str, '0');
-	else if (spec->padding == RIGHT_PADDING)
-		right_padding(pf, spec, str, ' ');
+	if (str != NULL)
+	{
+		if (spec->padding == LEFT_PADDING)
+			left_padding(pf, spec, str);
+		else if (spec->padding == ZERO_PADDING)
+			right_padding(pf, spec, str, '0');
+		else if (spec->padding == RIGHT_PADDING)
+			right_padding(pf, spec, str, ' ');
+	}
+	else
+	{
+		if (spec->padding == LEFT_PADDING)
+			left_padding(pf, spec, "(null)");
+		else if (spec->padding == ZERO_PADDING)
+			right_padding(pf, spec, "(null)", '0');
+		else if (spec->padding == RIGHT_PADDING)
+			right_padding(pf, spec, "(null)", ' ');
+	}
 }

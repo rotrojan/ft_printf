@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 17:44:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/18 00:18:45 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
-# define MAX(x, y) ((x) > (y) ? (x) : (y))
-# define MIN(x, y) ((x) > (y) ? (y) : (x))
 
 typedef struct	s_spec
 {

@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 17:59:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 16:28:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/18 00:20:22 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void		parse_numbers_or_star(t_printf *pf, t_spec *spec, va_list args)
 		while (ft_isdigit(pf->fmt[pf->i_fmt]))
 			pf->i_fmt++;
 	}
-	if (spec->min_field_width < 0)
+	if (spec->min_field_width < -1)
 	{
 		spec->min_field_width *= -1;
 		spec->padding = LEFT_PADDING;
 	}
-	if (spec->precision < 0)
-		spec->precision = 0;
+	if (spec->precision < -1)
+		spec->precision = -1;
 }
 
 void		parse_spec(t_printf *pf, t_spec *spec, va_list args)
