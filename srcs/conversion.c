@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 17:45:51 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/19 10:29:23 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 void		init_spec(t_spec *spec)
 {
-	spec->min_field_width = -1;
+	spec->min_field_width = 0;
 	spec->precision = -1;
 	spec->padding = RIGHT_PADDING;
 }

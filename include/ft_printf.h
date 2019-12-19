@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/18 00:18:45 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/19 21:16:13 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int				ft_printf(char const *format, ...);
 void			print_buff_and_clear(t_printf *pf);
 void			ft_conversion(t_printf *pf, va_list args);
 void			parsing(t_printf *pf, t_spec *spec, va_list args, int *conv);
+void			init_spec(t_spec *spec);
+void			putnbr_buffer(int nb, t_printf *pf, t_spec *spec);
+void			write_in_buff_and_increment(t_printf *pf, t_spec *spec, char c);
 
 /*
 *************************CONVERSION FUNCTIONS***********************************

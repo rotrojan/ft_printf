@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/15 01:44:07 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/16 16:04:24 by rotrojan         ###   ########.fr        #
+#    Updated: 2019/12/19 21:17:13 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS_DIR		=		./srcs/
 SRCS			=		ft_printf.c									\
 						parsing.c									\
 						conversion.c								\
+						putnbr_buffer.c								\
 						convert_char.c								\
 						convert_str.c								\
 						convert_int.c								\
@@ -61,6 +62,9 @@ ${OBJS_DIR}%.o	:		%.c | ${OBJS_DIR}
 
 ${OBJS_DIR}		:
 	mkdir -p ${OBJS_DIR}
+
+test			:		all
+	clang -Wall -Wextra -Werror ../../main_printf.c -L. -lftprintf -I include
 
 clean			:
 	${RM} -r ${OBJS_DIR}
