@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 21:19:17 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 14:24:50 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:32:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void		left_padding(t_printf *pf, t_spec *spec, va_list args)
 {
 	pf->buf[pf->i_buf] = (char)va_arg(args, int);
-	spec->min_field_width--;
+	spec->width--;
 	if (++(pf->i_buf) == BUFFER_SIZE)
 		print_buff_and_clear(pf);
-	while (--spec->min_field_width >= 0)
+	while (--spec->width >= 0)
 	{
 		pf->buf[pf->i_buf] = ' ';
 		if (++pf->i_buf == BUFFER_SIZE)
@@ -28,7 +28,7 @@ static void		left_padding(t_printf *pf, t_spec *spec, va_list args)
 
 static void		right_padding(t_printf *pf, t_spec *spec, va_list args, char c)
 {
-	while (spec->min_field_width-- > 1)
+	while (spec->width-- > 1)
 	{
 		pf->buf[pf->i_buf] = c;
 		if (++pf->i_buf == BUFFER_SIZE)

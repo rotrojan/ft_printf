@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 17:59:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/19 10:40:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 02:10:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,29 @@ int			parse_flags(t_printf *pf, t_spec *spec)
 
 void		parse_numbers_or_star(t_printf *pf, t_spec *spec, va_list args)
 {
-	if (pf->fmt[pf->i_fmt] == '*')
+	if (pf->fmt[pf->i_fmt] == '*' && (pf->fmt[pf->i_fmt - 1] == '.'))
 	{
-		if (pf->fmt[pf->i_fmt - 1] == '.')
-		{
-			if ((spec->precision = va_arg(args, int)) < 0)
-				spec->precision = -1;
-		}
-		else
-			spec->min_field_width = va_arg(args, int);
+		if ((spec->precision = va_arg(args, int)) < 0)
+			spec->precision = -1;
 		pf->i_fmt++;
 	}
-	else
+	else if (pf->fmt[pf->i_fmt] == '*')
 	{
-		if (pf->fmt[pf->i_fmt - 1] == '.')
-			spec->precision = ft_atoi_lite(&pf->fmt[pf->i_fmt]);
-		else
-			spec->min_field_width = ft_atoi_lite(&pf->fmt[pf->i_fmt]);
-		while (ft_isdigit(pf->fmt[pf->i_fmt]))
-			pf->i_fmt++;
+		spec->width = va_arg(args, int);
+		pf->i_fmt++;
 	}
-	if (spec->min_field_width < 0)
+	else if (pf->fmt[pf->i_fmt - 1] == '.')
+		spec->precision = ft_atoi_lite(&pf->fmt[pf->i_fmt]);
+	else
+		spec->width = ft_atoi_lite(&pf->fmt[pf->i_fmt]);
+	while (ft_isdigit(pf->fmt[pf->i_fmt]))
+		pf->i_fmt++;
+	if (spec->width < 0)
 	{
-		spec->min_field_width *= -1;
+		spec->width *= -1;
 		spec->padding = LEFT_PADDING;
 	}
-	if (spec->precision < 0)
-		spec->precision = -1;
+	spec->precision = spec->precision < 0 ? -1 : spec->precision;
 }
 
 void		parse_spec(t_printf *pf, t_spec *spec, va_list args)

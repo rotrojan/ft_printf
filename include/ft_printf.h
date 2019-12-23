@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/19 21:16:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 04:44:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct	s_spec
 {
-	int		min_field_width;
+	int		width;
 	int		precision;
 	int		padding;
 }				t_spec;

@@ -6,11 +6,12 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/19 21:19:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 06:11:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static int		get_len_digit(int d)
 {
@@ -29,53 +30,58 @@ void			write_in_buff_and_increment(t_printf *pf, t_spec *spec, char c)
 	pf->buf[pf->i_buf] = c;
 	if (++pf->i_buf == BUFFER_SIZE)
 		print_buff_and_clear(pf);
-	spec->min_field_width--;
+	spec->width--;
 }
 
 static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {
-	int		len_to_write;
+	int		to_write;
 
-	len_to_write = get_len_digit(d);
+	to_write = get_len_digit(d);
 	if (d < 0)
 		write_in_buff_and_increment(pf, spec, '-');
-	while (spec->precision > len_to_write)
+	while (spec->precision > to_write)
 	{
 		write_in_buff_and_increment(pf, spec, '0');
 		spec->precision--;
 	}
-	if (!d && !spec->precision)
+	if (!d && !spec->precision && spec->width)
 		write_in_buff_and_increment(pf, spec, ' ');
-	else
+	else if (d || spec->precision)
 		putnbr_buffer(d, pf, spec);
-	while (spec->min_field_width > 0)
+	while (spec->width > 0)
 		write_in_buff_and_increment(pf, spec, ' ');
 }
 
 static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
 {
-	int		len_to_write;
+	int		to_write;
 
-	len_to_write = get_len_digit(d);
-	if (c == '0' && spec->precision != -1)
-		c = ' ';
+	to_write = get_len_digit(d);
+	c = (c == '0' && spec->precision != -1) ? ' ' : c;
 	if (d < 0 && c == '0')
 		write_in_buff_and_increment(pf, spec, '-');
-	while ((spec->min_field_width > len_to_write + 1) &&
-		(spec->min_field_width > spec->precision + 1))
+	while ((spec->width > to_write) && (spec->width > spec->precision))
+	{
+		if (d < 0 && spec->width == to_write + 1)
+			break ;
 		write_in_buff_and_increment(pf, spec, c);
+	}
 	if (d < 0 && c == ' ')
+//	{
+//		printf("yolo\n");
 		write_in_buff_and_increment(pf, spec, '-');
-	else
-		write_in_buff_and_increment(pf, spec, c);
-	while (spec->precision > len_to_write)
+//	}
+	else if (d < 0 && spec->width > 0)
+		write_in_buff_and_increment(pf, spec, '0');
+	while (spec->precision > to_write)
 	{
 		write_in_buff_and_increment(pf, spec, '0');
 		spec->precision--;
 	}
-	if (!d && !spec->precision)
+	if (!d && !spec->precision && spec->width)
 		write_in_buff_and_increment(pf, spec, ' ');
-	else
+	else if (d || spec->precision)
 		putnbr_buffer(d, pf, spec);
 }
 
