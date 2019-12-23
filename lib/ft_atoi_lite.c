@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:51:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 04:54:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 06:35:57 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ int		ft_atoi_lite(char const *str)
 		if (overflow == 9)
 			return (0);
 	}
-	
 	return (result);
 }

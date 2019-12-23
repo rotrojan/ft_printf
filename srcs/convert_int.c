@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 06:11:40 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 06:46:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,16 @@ static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
 
 	to_write = get_len_digit(d);
 	c = (c == '0' && spec->precision != -1) ? ' ' : c;
-	if (d < 0 && c == '0')
-		write_in_buff_and_increment(pf, spec, '-');
+	d < 0 && c == '0' ? write_in_buff_and_increment(pf, spec, '-') : 1;
 	while ((spec->width > to_write) && (spec->width > spec->precision))
 	{
-		if (d < 0 && spec->width == to_write + 1)
+		if (d < 0 && (spec->width == to_write + 1
+		|| spec->width == spec->precision + 1))
 			break ;
 		write_in_buff_and_increment(pf, spec, c);
 	}
 	if (d < 0 && c == ' ')
-//	{
-//		printf("yolo\n");
 		write_in_buff_and_increment(pf, spec, '-');
-//	}
 	else if (d < 0 && spec->width > 0)
 		write_in_buff_and_increment(pf, spec, '0');
 	while (spec->precision > to_write)

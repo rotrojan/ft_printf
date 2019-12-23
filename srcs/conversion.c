@@ -6,20 +6,22 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 02:09:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2019/12/23 06:48:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+
 /*
-static void	test_disp_struc(t_spec *spec)
-{
-	printf("width %d\n", spec->width);
-	printf("precis %d\n", spec->precision);
-	printf("paddin %d\n", spec->padding);
-}
+**static void	test_disp_struc(t_spec *spec)
+**{
+**	printf("width %d\n", spec->width);
+**	printf("precis %d\n", spec->precision);
+**	printf("paddin %d\n", spec->padding);
+**}
 */
+
 void		init_spec(t_spec *spec)
 {
 	spec->width = 0;
@@ -48,5 +50,4 @@ void		ft_conversion(t_printf *pf, va_list args)
 	pf->i_fmt++;
 	parsing(pf, &spec, args, &index_conv);
 	convert[index_conv](pf, &spec, args);
-//	test_disp_struc(&spec);
 }
