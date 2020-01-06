@@ -14,10 +14,10 @@
 
 int			is_token(char c)
 {
-	static char		*str_conversion = STR_CONVERSION;
+	static char const		*str_conversion = STR_CONVERSION;
 	char			*current;
 
-	current = str_conversion;
+	current = (char*)str_conversion;
 	while (*current)
 	{
 		if (*current == c)
@@ -107,4 +107,5 @@ void		parsing(t_printf *pf, t_spec *spec, va_list args, int *index_conv)
 		}
 		parse_spec(pf, spec, args);
 	}
+	spec->conv = pf->fmt[pf->i_fmt];
 }

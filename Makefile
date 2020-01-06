@@ -21,8 +21,7 @@ SRCS			=		ft_printf.c									\
 						convert_int.c								\
 						convert_uint.c								\
 						convert_ptr.c								\
-						convert_hexlow.c							\
-						convert_hexupp.c							\
+						convert_hexa.c							\
 						convert_percent.c
 
 LIB_DIR			=		./lib/

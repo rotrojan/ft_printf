@@ -11,33 +11,12 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-
-static int		get_len_digit(int d)
-{
-	int		len;
-
-	if (!d)
-		return (1);
-	len = 1;
-	while (d /= 10)
-		len++;
-	return (len);
-}
-
-void			write_in_buff_and_increment(t_printf *pf, t_spec *spec, char c)
-{
-	pf->buf[pf->i_buf] = c;
-	if (++pf->i_buf == BUFFER_SIZE)
-		print_buff_and_clear(pf);
-	spec->width--;
-}
 
 static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {
 	int		to_write;
 
-	to_write = get_len_digit(d);
+	to_write = get_len_digit((int)d, 10);
 	if (d < 0)
 		write_in_buff_and_increment(pf, spec, '-');
 	while (spec->precision > to_write)
@@ -48,18 +27,20 @@ static void		left_padding(t_printf *pf, t_spec *spec, int d)
 	if (!d && !spec->precision && spec->width)
 		write_in_buff_and_increment(pf, spec, ' ');
 	else if (d || spec->precision)
-		putnbr_buffer(d, pf, spec);
+		put_s_int_buffer(d, pf, spec);
 	while (spec->width > 0)
 		write_in_buff_and_increment(pf, spec, ' ');
 }
 
-static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
+static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 {
 	int		to_write;
 
-	to_write = get_len_digit(d);
-	c = (c == '0' && spec->precision != -1) ? ' ' : c;
-	d < 0 && c == '0' ? write_in_buff_and_increment(pf, spec, '-') : 1;
+	to_write = get_len_digit((int)d, 10);
+	if (c == '0' && spec->precision != -1)
+		c = ' ';
+	if (d < 0 && c == '0')
+		write_in_buff_and_increment(pf, spec, '-');
 	while ((spec->width > to_write) && (spec->width > spec->precision))
 	{
 		if (d < 0 && (spec->width == to_write + 1
@@ -76,10 +57,15 @@ static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
 		write_in_buff_and_increment(pf, spec, '0');
 		spec->precision--;
 	}
+}
+
+static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
+{
+	right_padding_fill(pf, spec, d, c);
 	if (!d && !spec->precision && spec->width)
 		write_in_buff_and_increment(pf, spec, ' ');
 	else if (d || spec->precision)
-		putnbr_buffer(d, pf, spec);
+		put_s_int_buffer(d, pf, spec);
 }
 
 void			convert_int(t_printf *pf, t_spec *spec, va_list args)

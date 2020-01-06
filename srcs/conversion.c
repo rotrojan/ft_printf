@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 /*
 **static void	test_disp_struc(t_spec *spec)
@@ -40,8 +39,8 @@ void		ft_conversion(t_printf *pf, va_list args)
 		&convert_int,
 		&convert_int,
 		&convert_uint,
-		&convert_hexlow,
-		&convert_hexupp,
+		&convert_hexa,
+		&convert_hexa,
 		&convert_percent
 	};
 
