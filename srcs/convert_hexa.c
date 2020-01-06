@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_hexlow.c                                   :+:      :+:    :+:   */
+/*   convert_hexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 18:23:13 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/15 08:20:08 by rotrojan         ###   ########.fr       */
+/*   Created: 2020/01/06 21:30:09 by rotrojan          #+#    #+#             */
+/*   Updated: 2020/01/06 21:30:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-# define BASE 16
+#define BASE 16
 
 static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {

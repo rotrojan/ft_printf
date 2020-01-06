@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 04:44:59 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 22:35:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 ******************************UTILS FUNCTIONS***********************************
 */
 
-int		get_len_digit(unsigned int d, int base);
+int		get_len_digit(unsigned long int d, int base);
 void	print_buff_and_clear(t_printf *pf);
 void	put_s_int_buffer(int nb, t_printf *pf, t_spec *spec);
 void	put_u_int_buffer(unsigned int nb, t_printf *pf, t_spec *spec);
-void	put_hexa_buffer(unsigned int nb, t_printf *pf, t_spec *spec, char base[16]);
+void	put_hexa_buffer(unsigned long int nb, t_printf *pf, t_spec *spec, char base[16]);
 
 /*
 *******************************LIB FUNCTIONS************************************

@@ -6,17 +6,18 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 06:46:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 21:40:26 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#define BASE 10
 
 static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {
 	int		to_write;
 
-	to_write = get_len_digit((int)d, 10);
+	to_write = get_len_digit(d, BASE);
 	if (d < 0)
 		write_in_buff_and_increment(pf, spec, '-');
 	while (spec->precision > to_write)
@@ -36,7 +37,7 @@ static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 {
 	int		to_write;
 
-	to_write = get_len_digit((int)d, 10);
+	to_write = get_len_digit(d, BASE);
 	if (c == '0' && spec->precision != -1)
 		c = ' ';
 	if (d < 0 && c == '0')
@@ -44,7 +45,7 @@ static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 	while ((spec->width > to_write) && (spec->width > spec->precision))
 	{
 		if (d < 0 && (spec->width == to_write + 1
-		|| spec->width == spec->precision + 1))
+			|| spec->width == spec->precision + 1))
 			break ;
 		write_in_buff_and_increment(pf, spec, c);
 	}

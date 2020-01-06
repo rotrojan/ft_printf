@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:23:46 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/15 08:21:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 17:11:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		right_padding(t_printf *pf, t_spec *spec, char c)
 		print_buff_and_clear(pf);
 }
 
-void			convert_char(t_printf *pf, t_spec *spec, va_list args)
+void			convert_percent(t_printf *pf, t_spec *spec, va_list args)
 {
 	(void)args;
 	if (spec->padding == LEFT_PADDING)

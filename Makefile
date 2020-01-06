@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/15 01:44:07 by rotrojan          #+#    #+#              #
-#    Updated: 2019/12/23 03:23:32 by rotrojan         ###   ########.fr        #
+#    Updated: 2020/01/06 13:53:18 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,14 @@ SRCS_DIR		=		./srcs/
 SRCS			=		ft_printf.c									\
 						parsing.c									\
 						conversion.c								\
-						putnbr_buffer.c								\
 						convert_char.c								\
 						convert_str.c								\
 						convert_int.c								\
 						convert_uint.c								\
 						convert_ptr.c								\
-						convert_hexa.c							\
-						convert_percent.c
+						convert_percent.c							\
+						convert_hexa.c								\
+						ft_printf_utils.c							\
 
 LIB_DIR			=		./lib/
 LIB				=		ft_atoi_lite.c								\

@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:43 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/15 08:22:05 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/06 22:51:25 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
 
 void			convert_uint(t_printf *pf, t_spec *spec, va_list args)
 {
-	int		d;
+	unsigned long int		d;
 
-	d = va_arg(args, unsigned int);
+	d = va_arg(args, unsigned long int);
 	if (spec->padding == LEFT_PADDING)
 		left_padding(pf, spec, d);
 	else if (spec->padding == ZERO_PADDING)
