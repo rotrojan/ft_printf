@@ -6,13 +6,14 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/06 22:35:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:23:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdarg.h>
 # define NB_CONVERSIONS 9
 # define STR_CONVERSION "cspdiuxX%"
@@ -23,7 +24,8 @@
 # define MIN_INT -2147483648
 # define MAX_UINT 4294967295
 # define MIN_UINT 0
-
+#define MIN_LONG_LONG -9223372036854775807
+#define MAX_LONG_LONG 9223372036854775807
 
 typedef struct	s_spec
 {
@@ -75,11 +77,12 @@ void	convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 ******************************UTILS FUNCTIONS***********************************
 */
 
-int		get_len_digit(unsigned long int d, int base);
+int		get_len_digit_signed(intmax_t d);
+int		get_len_digit_unsigned(uintmax_t d, int base);
 void	print_buff_and_clear(t_printf *pf);
 void	put_s_int_buffer(int nb, t_printf *pf, t_spec *spec);
-void	put_u_int_buffer(unsigned int nb, t_printf *pf, t_spec *spec);
-void	put_hexa_buffer(unsigned long int nb, t_printf *pf, t_spec *spec, char base[16]);
+void	put_u_int_buffer(uintmax_t nb, t_printf *pf, t_spec *spec);
+void	put_hexa_buffer(uintmax_t nb, t_printf *pf, t_spec *spec, char base[16]);
 
 /*
 *******************************LIB FUNCTIONS************************************
