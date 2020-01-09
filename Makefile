@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/15 01:44:07 by rotrojan          #+#    #+#              #
-#    Updated: 2020/01/09 02:35:43 by rotrojan         ###   ########.fr        #
+#    Updated: 2020/01/09 13:32:40 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS			=		ft_printf.c									\
 						convert_ptr.c								\
 						convert_hexa.c								\
 						ft_printf_utils.c							\
+						digits_displaying_utils.c
 
 LIB_DIR			=		./lib/
 LIB				=		ft_atoi_lite.c								\
@@ -60,9 +61,6 @@ ${OBJS_DIR}%.o	:		%.c | ${OBJS_DIR}
 
 ${OBJS_DIR}		:
 	mkdir -p ${OBJS_DIR}
-
-test			:		all
-	clang -Wall -Wextra ../../main_printf.c -L. -lftprintf -I include
 
 clean			:
 	${RM} -r ${OBJS_DIR}

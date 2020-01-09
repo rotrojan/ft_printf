@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:52:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 00:05:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 12:52:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,11 @@ static void		right_padding(t_printf *pf, t_spec *spec, uintmax_t d, char c)
 	}
 }
 
-#include <stdio.h>
-
 void			convert_hexa(t_printf *pf, t_spec *spec, va_list args)
 {
 	uintmax_t	d;
 
 	d = va_arg(args, uintmax_t);
-//	printf("d =  %lx\n", d);
 	if (spec->padding == LEFT_PADDING)
 		left_padding(pf, spec, d);
 	else if (spec->padding == ZERO_PADDING)

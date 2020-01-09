@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/08 17:53:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 12:53:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		left_padding(t_printf *pf, t_spec *spec, int d)
 		write_in_buff_and_increment(pf, spec, ' ');
 }
 
-static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
+static void		right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 {
 	int		to_write;
 
@@ -44,7 +44,8 @@ static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 		write_in_buff_and_increment(pf, spec, '-');
 	while ((spec->width > to_write) && (spec->width > spec->precision))
 	{
-		if (d < 0 && (spec->width == to_write + 1 || spec->width == spec->precision + 1))
+		if (d < 0 && (spec->width == to_write + 1
+			|| spec->width == spec->precision + 1))
 			break ;
 		write_in_buff_and_increment(pf, spec, c);
 	}

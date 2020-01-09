@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 17:59:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/23 02:10:40 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 13:33:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int			is_token(char c)
 {
 	static char const		*str_conversion = STR_CONVERSION;
-	char			*current;
+	char					*current;
 
 	current = (char*)str_conversion;
 	while (*current)

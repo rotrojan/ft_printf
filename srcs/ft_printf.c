@@ -6,19 +6,11 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 03:58:20 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 14:24:38 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 11:53:20 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	print_buff_and_clear(t_printf *pf)
-{
-	write(STDOUT_FILENO, pf->buf, BUFFER_SIZE);
-	ft_bzero(pf->buf, BUFFER_SIZE);
-	pf->i_buf = 0;
-	pf->already_written += BUFFER_SIZE;
-}
 
 int		ft_printf(char const *format, ...)
 {
