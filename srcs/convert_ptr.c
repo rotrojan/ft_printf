@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:23:59 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 13:18:20 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:30:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ static void		left_padding(t_printf *pf, t_spec *spec, uintptr_t d)
 		spec->precision--;
 	}
 	if (d || spec->precision || !spec->width)
-	{
 		put_hexa_buffer(d, pf, spec, "0123456789abcdef");
-	}
 	while (spec->width > 0)
 		write_in_buff_and_increment(pf, spec, ' ');
 }

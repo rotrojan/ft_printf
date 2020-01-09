@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 17:59:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 13:33:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:36:03 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ int			parse_flags(t_printf *pf, t_spec *spec)
 		return (0);
 }
 
+#include <stdio.h>
+
 void		parse_numbers_or_star(t_printf *pf, t_spec *spec, va_list args)
 {
 	if (pf->fmt[pf->i_fmt] == '*' && (pf->fmt[pf->i_fmt - 1] == '.'))
 	{
-		if ((spec->precision = va_arg(args, int)) < 0)
-			spec->precision = -1;
+		spec->precision = va_arg(args, int);
 		pf->i_fmt++;
 	}
 	else if (pf->fmt[pf->i_fmt] == '*')
@@ -71,6 +72,7 @@ void		parse_numbers_or_star(t_printf *pf, t_spec *spec, va_list args)
 		spec->padding = LEFT_PADDING;
 	}
 	spec->precision = spec->precision < 0 ? -1 : spec->precision;
+//	printf("\nprecision = %d\nwidth = %d\n", spec->precision, spec->width);
 }
 
 void		parse_spec(t_printf *pf, t_spec *spec, va_list args)

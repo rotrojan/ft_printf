@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 12:53:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:38:24 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 	}
 	if (d < 0 && c == ' ')
 		write_in_buff_and_increment(pf, spec, '-');
-	else if (d < 0 && spec->width > 0)
+	else if (d < 0 && spec->width > to_write)
 		write_in_buff_and_increment(pf, spec, '0');
 	while (spec->precision > to_write)
 	{
