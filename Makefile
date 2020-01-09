@@ -6,7 +6,7 @@
 #    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/15 01:44:07 by rotrojan          #+#    #+#              #
-#    Updated: 2020/01/06 13:53:18 by rotrojan         ###   ########.fr        #
+#    Updated: 2020/01/09 02:35:43 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRCS			=		ft_printf.c									\
 						convert_int.c								\
 						convert_uint.c								\
 						convert_ptr.c								\
-						convert_percent.c							\
 						convert_hexa.c								\
 						ft_printf_utils.c							\
 
@@ -63,7 +62,7 @@ ${OBJS_DIR}		:
 	mkdir -p ${OBJS_DIR}
 
 test			:		all
-	clang -Wall -Wextra -Werror ../../main_printf.c -L. -lftprintf -I include
+	clang -Wall -Wextra ../../main_printf.c -L. -lftprintf -I include
 
 clean			:
 	${RM} -r ${OBJS_DIR}

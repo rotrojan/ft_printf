@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 21:33:39 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/07 21:08:54 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 00:52:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		ft_conversion(t_printf *pf, va_list args)
 		&convert_uint,
 		&convert_hexa,
 		&convert_hexa,
-		&convert_percent
+		&convert_char
 	};
 
 	index_conv = -1;

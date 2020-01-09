@@ -6,17 +6,18 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:06 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/07 20:24:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:53:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#define BASE 10
 
 static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {
 	int		to_write;
 
-	to_write = get_len_digit_signed(d);
+	to_write = get_len_digit(d, BASE, spec);
 	if (d < 0)
 		write_in_buff_and_increment(pf, spec, '-');
 	while (spec->precision > to_write)
@@ -36,7 +37,7 @@ static void	right_padding_fill(t_printf *pf, t_spec *spec, int d, char c)
 {
 	int		to_write;
 
-	to_write = get_len_digit_signed(d);
+	to_write = get_len_digit(d, BASE, spec);
 	if (c == '0' && spec->precision != -1)
 		c = ' ';
 	if (d < 0 && c == '0')

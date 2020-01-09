@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 03:53:09 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/07 20:23:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/09 01:44:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,15 @@ void	convert_ptr(t_printf *pf, t_spec *conv_spec, va_list args);
 void	convert_int(t_printf *pf, t_spec *conv_spec, va_list args);
 void	convert_uint(t_printf *pf, t_spec *conv_spec, va_list args);
 void	convert_hexa(t_printf *pf, t_spec *conv_spec, va_list args);
-void	convert_percent(t_printf *pf, t_spec *conv_spec, va_list args);
 
 /*
 ******************************UTILS FUNCTIONS***********************************
 */
 
-int		get_len_digit_signed(intmax_t d);
-int		get_len_digit_unsigned(uintmax_t d, int base);
+int		get_len_digit(unsigned long int d, int base, t_spec *spec);
 void	print_buff_and_clear(t_printf *pf);
 void	put_s_int_buffer(int nb, t_printf *pf, t_spec *spec);
-void	put_u_int_buffer(uintmax_t nb, t_printf *pf, t_spec *spec);
+void	put_u_int_buffer(unsigned int nb, t_printf *pf, t_spec *spec);
 void	put_hexa_buffer(uintmax_t nb, t_printf *pf, t_spec *spec, char base[16]);
 
 /*

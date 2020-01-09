@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:22:43 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/07 20:25:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:50:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		left_padding(t_printf *pf, t_spec *spec, int d)
 {
 	int		to_write;
 
-	to_write = get_len_digit_unsigned(d, BASE);
+	to_write = get_len_digit(d, BASE, spec);
 	while (spec->precision > to_write)
 	{
 		write_in_buff_and_increment(pf, spec, '0');
@@ -35,16 +35,11 @@ static void		right_padding(t_printf *pf, t_spec *spec, int d, char c)
 {
 	int		to_write;
 
-	to_write = get_len_digit_unsigned(d, BASE);
+	to_write = get_len_digit(d, BASE, spec);
 	if (c == '0' && spec->precision != -1)
 		c = ' ';
 	while ((spec->width > to_write) && (spec->width > spec->precision))
-	{
-		if (d < 0 && (spec->width == to_write + 1
-		|| spec->width == spec->precision + 1))
-			break ;
 		write_in_buff_and_increment(pf, spec, c);
-	}
 	while (spec->precision > to_write)
 	{
 		write_in_buff_and_increment(pf, spec, '0');
@@ -60,7 +55,7 @@ void			convert_uint(t_printf *pf, t_spec *spec, va_list args)
 {
 	unsigned long int		d;
 
-	d = va_arg(args, unsigned long int);
+	d = va_arg(args, unsigned int);
 	if (spec->padding == LEFT_PADDING)
 		left_padding(pf, spec, d);
 	else if (spec->padding == ZERO_PADDING)
