@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:23:59 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/09 17:30:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/10 16:43:09 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ static void		right_padding(t_printf *pf, t_spec *spec, uintptr_t d, char c)
 		put_zero_x_in_front_of_address(pf, spec);
 	while ((spec->width > to_write) && (spec->width > spec->precision))
 	{
-		write_in_buff_and_increment(pf, spec, c);
-		if (spec->width == to_write + 2 && (c != ' ' || spec->precision == -1))
+		if (((!d && spec->width <= to_write + 2) ||
+			(spec->width == to_write + 2)) && spec->precision == -1)
 			break ;
+		write_in_buff_and_increment(pf, spec, c);
 	}
 	while (spec->precision > to_write)
 	{
