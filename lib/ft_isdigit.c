@@ -6,11 +6,15 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 18:04:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/14 23:32:08 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:39:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** man isdigit
+*/
 
 int		ft_isdigit(int c)
 {

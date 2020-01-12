@@ -6,11 +6,18 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:51:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/12 08:40:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:37:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** This lite implementation of the ft_atoi function will return an int value
+** corresponding to the given string, but will return 0 in case of int max
+** overflow, and does not handle negative numbers since the ft_printf "parsing"
+** function has no need for that.
+*/
 
 int		ft_atoi_lite(char const *str)
 {

@@ -6,11 +6,15 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 22:34:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/16 16:03:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:39:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** man strlen
+*/
 
 int		ft_strlen(char const *s)
 {

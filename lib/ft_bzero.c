@@ -6,11 +6,15 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 05:00:20 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/14 23:30:43 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:38:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+** man bzero
+*/
 
 void	ft_bzero(void *b, size_t n)
 {
