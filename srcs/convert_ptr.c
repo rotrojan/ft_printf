@@ -6,12 +6,22 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:23:59 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/10 16:43:09 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:15:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #define BASE 16
+
+/*
+** All the conversions functions are build on the same pattern : the function
+** uses va_arg to get the corresponding argument in the proper type, and then
+** calls one of the two sub-functions dedicated to handle (namely) either the
+** "right_padding" (with the specified padding character, '0' or ' ') or the
+** "left_padding".
+** The addresses are always written in a lower case hexadecimal base and are
+** prefixed with "0x".
+*/
 
 static void		put_zero_x_in_front_of_address(t_printf *pf, t_spec *spec)
 {
@@ -42,22 +52,14 @@ static void		right_padding(t_printf *pf, t_spec *spec, uintptr_t d, char c)
 
 	to_write = get_len_digit(d, BASE, spec);
 	c = (c == '0' && spec->precision != -1) ? ' ' : c;
-	if (c == ' ' && spec->precision != -1)
-		put_zero_x_in_front_of_address(pf, spec);
-	while ((spec->width > to_write) && (spec->width > spec->precision))
-	{
-		if (((!d && spec->width <= to_write + 2) ||
-			(spec->width == to_write + 2)) && spec->precision == -1)
-			break ;
+	while ((spec->width > to_write + 2) && (spec->width > spec->precision + 2))
 		write_in_buff_and_increment(pf, spec, c);
-	}
+	put_zero_x_in_front_of_address(pf, spec);
 	while (spec->precision > to_write)
 	{
 		write_in_buff_and_increment(pf, spec, '0');
 		spec->precision--;
 	}
-	if (c != ' ' || spec->precision == -1)
-		put_zero_x_in_front_of_address(pf, spec);
 	if (d || spec->precision || !spec->width)
 		put_hexa_buffer(d, pf, spec, "0123456789abcdef");
 }

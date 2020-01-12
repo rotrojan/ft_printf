@@ -6,12 +6,21 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:52:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2020/01/10 17:12:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:03:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #define BASE 16
+
+/*
+** All the conversions functions are build on the same pattern : the function
+** uses va_arg to get the corresponding argument in the proper type, and then
+** calls one of the two sub-functions dedicated to handle (namely) either the
+** "right_padding" (with the specified padding character, '0' or ' ') or the
+** "left_padding".
+** Two bases are given in order to handle '%x' and '%X with the same function'.
+*/
 
 static void		left_padding(t_printf *pf, t_spec *spec, uintmax_t d)
 {

@@ -6,37 +6,32 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 18:21:50 by rotrojan          #+#    #+#             */
-/*   Updated: 2019/12/22 17:32:30 by rotrojan         ###   ########.fr       */
+/*   Updated: 2020/01/12 10:01:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/*
+** All the conversions functions are build on the same pattern : the function
+** uses va_arg to get the corresponding argument in the proper type, and then
+** calls one of the two sub-functions dedicated to handle (namely) either the
+** "right_padding" (with the specified padding character, '0' or ' ') or the
+** "left_padding".
+** In case of a NULL string, the a "(null)" string is handled exactly as if
+** given in argument.
+*/
+
 static void		left_padding(t_printf *pf, t_spec *spec, char *str)
 {
 	if (spec->precision == -1)
 		while (*str)
-		{
-			pf->buf[pf->i_buf] = *str++;
-			if (++pf->i_buf == BUFFER_SIZE)
-				print_buff_and_clear(pf);
-			spec->width--;
-		}
+			write_in_buff_and_increment(pf, spec, *str++);
 	else
 		while (*str && spec->precision-- > 0)
-		{
-			pf->buf[pf->i_buf] = *str++;
-			if (++(pf->i_buf) == BUFFER_SIZE)
-				print_buff_and_clear(pf);
-			spec->width--;
-		}
+			write_in_buff_and_increment(pf, spec, *str++);
 	while (spec->width > 0)
-	{
-		pf->buf[pf->i_buf] = ' ';
-		if (++pf->i_buf == BUFFER_SIZE)
-			print_buff_and_clear(pf);
-		spec->width--;
-	}
+		write_in_buff_and_increment(pf, spec, ' ');
 }
 
 static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
@@ -48,18 +43,10 @@ static void		right_padding(t_printf *pf, t_spec *spec, char *str, char c)
 	else
 		to_be_written = ft_strlen(str) < spec->precision ?
 			ft_strlen(str) : spec->precision;
-	while (spec->width-- > to_be_written)
-	{
-		pf->buf[pf->i_buf] = c;
-		if (++pf->i_buf == BUFFER_SIZE)
-			print_buff_and_clear(pf);
-	}
+	while (spec->width > to_be_written)
+		write_in_buff_and_increment(pf, spec, c);
 	while (to_be_written-- > 0)
-	{
-		pf->buf[pf->i_buf] = *str++;
-		if (++pf->i_buf == BUFFER_SIZE)
-			print_buff_and_clear(pf);
-	}
+		write_in_buff_and_increment(pf, spec, *str++);
 }
 
 void			convert_str(t_printf *pf, t_spec *spec, va_list args)
